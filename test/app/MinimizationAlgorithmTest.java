@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -11,6 +12,7 @@ import static org.junit.Assert.*;
 
 public class MinimizationAlgorithmTest {
     private MinimizationAlgorithm minimizationAlgorithm;
+    private static final String  PRODUCT_NAME = "Mouse";
 
 
     @Before
@@ -23,6 +25,12 @@ public class MinimizationAlgorithmTest {
         assertThat(minimizationAlgorithm.execute(createUserInput()), is("Brazil"));
 
     }
+
+
+    @Test
+    public void shouldReturnIndexWhenProductAsFound() throws Exception {
+        assertThat(minimizationAlgorithm.getIndexOfInput(PRODUCT_NAME, createUserInput()), is(1));
+}
 
     private List<String> createUserInput(){
         List<String> inputArray = new ArrayList<>();

@@ -1,28 +1,29 @@
 package app;
 
+import list.ListOfCountry;
 import model.CountryType;
-import model.ProductType;
-import parse.ParseInput;
 import java.util.List;
 
 
 public class MinimizationAlgorithm {
-
-    private ParseInput parseInput;
-
-    public String execute(List<String> inputArray){
-
-        for (String input: inputArray) {
-            if(CountryType.isCountry(input)){
-                return input;
-            }
+    private ListOfCountry listOfCountry;
 
 
+    public String execute(List<String> inputArray) {
 
-        }
         return "error";
-
     }
+
+
+
+    protected int getIndexOfInput(String input, List<String> inputArray ){
+        int productIndex = 0;
+
+            if(inputArray.contains(input)){
+                productIndex = inputArray.indexOf(input);
+            }
+        return productIndex;
+     }
 
 
 
