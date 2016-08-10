@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ReadInputInformation {
     private List<String> inputArray = new ArrayList<>();
-    private final String fileAddress = "src/file/file.txt";
+    private final String fileAddress = "src/resource/resource.txt";
 
 
     public List<String> readFile() {
@@ -26,7 +26,7 @@ public class ReadInputInformation {
             bufferedReader.close();
 
         } catch (FileNotFoundException ex) {
-            System.out.println("file not found");
+            System.out.println("resource not found");
         } catch (IOException ex) {
             System.out.println("Error  I/O");
         }
