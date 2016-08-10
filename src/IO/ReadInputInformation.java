@@ -10,14 +10,14 @@ import java.util.List;
 
 
 public class ReadInputInformation {
-    private AddressFile addressFile = new AddressFile();
     private List<String> inputArray = new ArrayList<>();
+    private final String fileAddress = "src/file/file.txt";
 
 
     public List<String> readFile() {
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(addressFile.getAddressFile()));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileAddress));
             String line = bufferedReader.readLine();
             while (line != null) {
                 line = bufferedReader.readLine();
