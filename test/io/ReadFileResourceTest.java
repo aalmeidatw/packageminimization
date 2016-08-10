@@ -8,17 +8,17 @@ import static org.junit.Assert.*;
 
 
 
-public class ReadInputInformationTest {
-    private ReadInputInformation readInputInformation;
+public class ReadFileResourceTest {
+    private ReadFileResource readFileResource;
 
     @Before
     public void setUp() throws Exception {
-        this.readInputInformation = new ReadInputInformation();
+        this.readFileResource = new ReadFileResource();
     }
 
     @Test
     public void shouldReturnArrayAsInputFile() throws Exception {
-        List<String> inputArray = readInputInformation.readFile();
+        List<String> inputArray = readFileResource.readFile();
         assertThat(inputArray.get(0), is("Brazil Mouse 1"));
     }
 }
