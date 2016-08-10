@@ -1,5 +1,6 @@
 package parse;
 
+import io.Parser;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class ParserTest {
         inputArray.add("Argentina Mouse 2");
         inputArray.add("Keyboard 2");
 
-        expectedInputArray = parseInput.parseInputArray(inputArray);
+        expectedInputArray = parseInput.parseForArray(inputArray);
         assertThat(expectedInputArray.get(0), is("Brazil"));
         assertThat(expectedInputArray.get(3), is("Argentina"));
     }

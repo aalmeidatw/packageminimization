@@ -1,4 +1,4 @@
-package parse;
+package io;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 public class Parser {
     private List<String> arrayOfInput = new ArrayList<>();
 
-    public List<String> parseInputArray(List<String> array){
+    public List<String> parseForArray(List<String> array){
 
         for (String inputUser : array) {
             String[] line = inputUser.split(" ");
