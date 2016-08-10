@@ -3,7 +3,7 @@ package parse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseInput {
+public class Parser {
     private List<String> arrayOfInput = new ArrayList<>();
 
     public List<String> parseInputArray(List<String> array){

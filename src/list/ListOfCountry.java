@@ -12,7 +12,7 @@ public class ListOfCountry {
 
     public boolean isCountryExist(String countryName){
         for (Country country: countryList) {
-            if(country.getCountryName().equals(countryName)){
+            if(isEqualsCountry(countryName, country)){
                 return true;
             }
         }
@@ -23,5 +23,25 @@ public class ListOfCountry {
         countryList.add(country);
         return true;
     }
+
+    public void addItemToCountry(String countryName, String productName, int amount){
+
+        for (Country country: countryList) {
+            if(isEqualsCountry(countryName, country)){
+                country.addItemInCountry(productName, amount);
+            }
+        }
+
+    }
+
+    public int getProductAmount(Country country, String productName){
+        return country.getItemAmount(productName);
+
+    }
+
+    private boolean isEqualsCountry(String countryName, Country country) {
+        return country.getCountryName().equals(countryName);
+    }
+
 
 }

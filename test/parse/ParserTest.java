@@ -7,12 +7,12 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class ParseInputTest {
-    private ParseInput parseInput;
+public class ParserTest {
+    private Parser parseInput;
 
     @Before
     public void setUp() throws Exception {
-        this.parseInput = new ParseInput();
+        this.parseInput = new Parser();
     }
 
     @Test

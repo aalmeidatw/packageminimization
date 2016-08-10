@@ -1,4 +1,4 @@
-package IO;
+package io;
 
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;

@@ -5,6 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 
 public class ListOfCountryTest {
@@ -42,4 +44,9 @@ public class ListOfCountryTest {
         assertFalse(listOfCountry.isCountryExist(SOME_COUNTRY));
     }
 
+    @Test
+    public void shouldReturnProductAmountPassedACountry() throws Exception {
+        assertThat(listOfCountry.getProductAmount(brazilCountry, MOUSE_ITEM), is(MOUSE_COUNT));
+
+    }
 }
