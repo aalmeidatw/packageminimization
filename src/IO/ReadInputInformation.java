@@ -1,6 +1,8 @@
 package io;
 
 
+import exception.FileErrorException;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,9 +14,10 @@ import java.util.List;
 public class ReadInputInformation {
     private List<String> inputArray = new ArrayList<>();
     private final String fileAddress = "src/resource/resource.txt";
+    private static final String FILE_NOT_FOUND_MESSAGE = "File not found";
 
 
-    public List<String> readFile() {
+    public List<String> readFile() throws Exception {
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileAddress));
@@ -26,11 +29,8 @@ public class ReadInputInformation {
             bufferedReader.close();
 
         } catch (FileNotFoundException ex) {
-            System.out.println("resource not found");
-        } catch (IOException ex) {
-            System.out.println("Error  I/O");
+                  throw new FileErrorException(FILE_NOT_FOUND_MESSAGE);
         }
-
         return inputArray;
     }
 
