@@ -12,11 +12,11 @@ import java.util.List;
 
 public class Parser {
     private List<String> inputArray = new ArrayList<>();
-    private final String FILE_ADDRESS = "src/resource/file.txt";
+    //private final String FILE_ADDRESS = "src/resource/file.txt";
     private static final String FILE_NOT_FOUND_MESSAGE = "File not found";
 
 
-    public List<String> readFile() throws Exception {
+    public List<String> readFile(String FILE_ADDRESS) throws Exception {
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_ADDRESS));
