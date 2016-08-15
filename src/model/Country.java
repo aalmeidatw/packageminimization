@@ -5,7 +5,8 @@ import java.util.HashMap;
 
 public class Country {
     private String countryName;
-    private HashMap<String, Integer> itemList = new HashMap<>();
+    private HashMap<String, Integer> countryItemList =  new HashMap<>();
+
 
     public Country(String countryName ) {
         this.countryName = countryName;
@@ -15,12 +16,12 @@ public class Country {
         return countryName;
     }
 
-    public boolean addItemInCountry(String productName, int amount){
-        itemList.put(productName, amount);
-        return true;
+
+    public void addItemInCountry(String productName, int amount){
+        countryItemList.put(productName, amount);
     }
 
     public int getItemAmount(String product){
-        return itemList.get(product);
+        return countryItemList.get(product);
     }
 }

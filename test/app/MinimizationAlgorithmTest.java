@@ -1,5 +1,6 @@
 package app;
 
+import algorithm.MinimizationAlgorithm;
 import list.ListOfCountry;
 import model.Country;
 import org.junit.Before;
@@ -26,29 +27,6 @@ public class MinimizationAlgorithmTest {
         this.minimizationAlgorithm = new MinimizationAlgorithm();
         this.brazilCountry = new Country(BRAZIL_NAME);
         this.listOfCountry = new ListOfCountry();
-    }
-
-    @Test
-    public void shouldAddItemToCountry() throws Exception {
-        listOfCountry.addToCountriesList(brazilCountry);
-        minimizationAlgorithm.execute(createUserInput(), listOfCountry);
-       assertThat(listOfCountry.getProductAmount(brazilCountry, PRODUCT_NAME), is(PRODUCT_AMOUNT));
-
-    }
-
-    @Test
-    public void shouldReturnIndexWhenProductAsFound() throws Exception {
-        assertThat(minimizationAlgorithm.getIndexOfInput(PRODUCT_NAME, createUserInput()), is(1));
-}
-
-    private List<String> createUserInput(){
-        List<String> inputArray = new ArrayList<>();
-
-        inputArray.add("Brazil");
-        inputArray.add("Mouse");
-        inputArray.add("2");
-
-        return inputArray;
     }
 
 }
