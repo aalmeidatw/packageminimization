@@ -22,10 +22,10 @@ public class Parser {
     private int productAmount;
 
 
-    public List<String> readFile(String FILE_ADDRESS) throws Exception {
+    public List<String> readFile(String fileAddress) throws Exception {
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_ADDRESS));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileAddress));
             String line = bufferedReader.readLine();
             while (line != null) {
 
