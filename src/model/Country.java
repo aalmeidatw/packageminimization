@@ -2,6 +2,7 @@ package model;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Country {
     private String countryName;
@@ -16,12 +17,24 @@ public class Country {
         return countryName;
     }
 
-
-    public void addItemInCountry(String productName, int amount){
+    public void addItem(String productName, int amount){
         countryItemList.put(productName, amount);
     }
 
     public int getItemAmount(String product){
         return countryItemList.get(product);
     }
+
+    public boolean isAvailableProduct(String productName){
+        boolean isAvailableProduct = false;
+
+        for (Map.Entry<String, Integer> item : countryItemList.entrySet() ){
+            if(item.getKey().equals(productName)){
+                isAvailableProduct = true;
+            }
+        }
+        return isAvailableProduct;
+    }
+
+
 }
