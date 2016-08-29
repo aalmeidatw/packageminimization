@@ -34,6 +34,11 @@ public class CountryTest {
 
     @Test
     public void shouldReturnTrueWhenIsAvailableProduct() throws Exception {
+        assertTrue(country.isAvailableProduct(ITEM_NAME));
+    }
+
+    @Test
+    public void shouldReturnFalseWhenProductIsNotAvailable() throws Exception {
         assertFalse(country.isAvailableProduct(OTHER_NAME));
-}
+    }
 }
