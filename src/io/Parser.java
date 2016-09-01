@@ -3,14 +3,9 @@ package io;
 
 import algorithm.MinimizationAlgorithm;
 import exception.FileErrorException;
-import model.Country;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Parser {
     private static final String FILE_NOT_FOUND_MESSAGE = "File not found";
