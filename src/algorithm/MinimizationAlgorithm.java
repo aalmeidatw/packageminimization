@@ -1,37 +1,63 @@
 package algorithm;
-import model.Country;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-
 public class MinimizationAlgorithm {
-    private List<Country> countryList = new ArrayList<>();
-    private HashMap<String, Integer> requestList =  new HashMap<>();
+    private List<String> countryList = new ArrayList<>();
+    private List<String> countryAvailableList = new ArrayList<>();
+    private List<String> requestList =  new ArrayList<>();
 
 
-    private void execute (){
-        //logic
+    public void execute (){
+
+        String[] arr = {"A","B","C","D","E","F"};
+        //combinations2(arr, 3, 0, new String[3]);
+
+
+
+
+
+
+
     }
 
 
+    public void  createCountryListThatHaveProduct(String productRequest){
 
-    public void addItemToCountry(String countryName, String product, int amount){
+        for (String country: countryList) {
 
-        for (Country country: countryList) {
+            String productName = getProductName(country);
 
-            if(country.getCountryName().equals(countryName)){
-                country.addItemInCountry(product, amount);
-            } else {
-                Country newCountry = new Country(countryName);
-                newCountry.addItemInCountry(product, amount);
-                countryList.add(newCountry);
+            if (productName.equals(productRequest)){
+                countryAvailableList.add(country);
             }
         }
+     }
+
+    private String getProductName(String country) {
+        String[] line = country.split(" ");
+        return line[1];
     }
 
-    public void addItemToRequestList(String productName, int productAmount){
-        requestList.put(productName, productAmount);
+    public List<String> getCountryList(){
+        return countryList;
+    }
+
+    public List<String> getRequestList(){
+        return requestList;
+    }
+
+    public List<String> getCountryAvailableList(){
+        return countryAvailableList;
+    }
+
+    public void addCountry(String country){
+        this.countryList.add(country);
+
+    }
+
+    public void addIRequestList(String request){
+        requestList.add(request);
     }
 
 }

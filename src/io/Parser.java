@@ -15,11 +15,7 @@ import java.util.List;
 public class Parser {
     private List<String> inputArray = new ArrayList<>();
     private static final String FILE_NOT_FOUND_MESSAGE = "File not found";
-    private Country country;
     private MinimizationAlgorithm minimizationAlgorithm;
-    private  String countryName;
-    private String productName;
-    private int productAmount;
 
 
     public List<String> readFile(String fileAddress) throws Exception {
@@ -30,6 +26,7 @@ public class Parser {
             while (line != null) {
 
                 line = bufferedReader.readLine();
+                System.out.println(line);
                 parseLine(line);
             }
             bufferedReader.close();
@@ -42,20 +39,27 @@ public class Parser {
     }
 
     private void parseLine(String inputLine){
-        String[] line = inputLine.split(" ");
 
-        splitLine(line);
+        if (inputLine != null) {
 
+            String[] line = inputLine.split(" ");
 
-        if(line.length == 2){
-            minimizationAlgorithm.addItemToCountry(countryName, productName, productAmount);
+            if (isCountry(line)) {
+                minimizationAlgorithm.addCountry(inputLine);
 
-        }else if (line.length == 1) {
-            minimizationAlgorithm.addItemToRequestList(productName,productAmount);}
+            } else {
+                minimizationAlgorithm.addIRequestList(inputLine);
+            }
+        }
+    }
+
+    private boolean isCountry(String[] line){
+        return line.length == 2;
+
     }
 
 
-    private void splitLine(String[] line){
+  /*  private void splitLine(String[] line){
 
         if (line.length == 2){
             this.countryName = line[0];
@@ -66,7 +70,7 @@ public class Parser {
             this.productName = line[0];
             this.productAmount =  Integer.parseInt(line[1]);
         }
-    }
+    }*/
 
 
 }

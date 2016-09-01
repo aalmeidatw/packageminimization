@@ -11,7 +11,6 @@ public class CountryTest {
     private static final String COUNTRY_NAME = "SOME_NAME";
     private static final String ITEM_NAME = "SOME_ITEM";
     private static final String OTHER_NAME = "OTHER_ITEM";
-
     private static final int AMOUNT = 2;
 
 
