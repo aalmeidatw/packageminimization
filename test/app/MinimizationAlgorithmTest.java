@@ -17,6 +17,8 @@ public class MinimizationAlgorithmTest {
     private static final String ARGENTINA_COUNTRY = "Argentina Mouse 2";
     private static final String MOUSE_REQUEST = "Mouse 2";
     private static final String MOUSE_NAME = "Mouse";
+    private static final String PARSE_STRING = "First Second";
+
 
     private static final String KEYBOARD_REQUEST = "keyboard 3";
 
@@ -74,6 +76,17 @@ public class MinimizationAlgorithmTest {
         assertThat(getInfo(list,1,0),is ("Argentina") );
 
     }
+
+    @Test
+    public void shoudReturnFirstWordOfStringPassed() throws Exception {
+        assertThat(minimizationAlgorithm.getParseInfo(PARSE_STRING, 0), is ("First"));
+    }
+
+    @Test
+    public void shoudReturnSecondWordOfStringPassed() throws Exception {
+        assertThat(minimizationAlgorithm.getParseInfo(PARSE_STRING, 1), is ("Second"));
+    }
+
     private String getInfo(List<String> list, int indexArray, int position){
         String[] line =list.get(indexArray).split(" ");
         return line[position];
