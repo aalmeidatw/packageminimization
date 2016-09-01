@@ -26,22 +26,19 @@ public class MinimizationAlgorithmTest {
     @Before
     public void setUp() throws Exception {
         this.minimizationAlgorithm = new MinimizationAlgorithm();
+        minimizationAlgorithm.addCountry(BRAZIL_COUNTRY);
+        minimizationAlgorithm.addCountry(CHILE_COUNTRY);
+        minimizationAlgorithm.addCountry(ARGENTINA_COUNTRY);
     }
 
     @Test
     public void shouldAddBrazilCountry() throws Exception {
-        minimizationAlgorithm.addCountry(BRAZIL_COUNTRY);
-        minimizationAlgorithm.addCountry(CHILE_COUNTRY);
-
         List<String> list = minimizationAlgorithm.getCountryList();
         assertThat(getInfo(list,0,0 ),is ("Brazil") );
     }
 
     @Test
     public void shouldAddChileCountry() throws Exception {
-        minimizationAlgorithm.addCountry(BRAZIL_COUNTRY);
-        minimizationAlgorithm.addCountry(CHILE_COUNTRY);
-
         List<String> list = minimizationAlgorithm.getCountryList();
         assertThat(getInfo(list,1,0),is ("Chile") );
     }
@@ -64,16 +61,14 @@ public class MinimizationAlgorithmTest {
     }
 
     @Test
-    public void shouldCreateCountryListThatHaveMouseProductIsPassed() throws Exception {
-        minimizationAlgorithm.addCountry(BRAZIL_COUNTRY);
-        minimizationAlgorithm.addCountry(CHILE_COUNTRY);
-        minimizationAlgorithm.addCountry(ARGENTINA_COUNTRY);
-
-        minimizationAlgorithm.createCountryListThatHaveProduct(MOUSE_NAME);
+    public void shouldCreateCountryListThatHaveMouseProductPassed() throws Exception {
+        minimizationAlgorithm.addIRequestList(MOUSE_REQUEST);
+        minimizationAlgorithm.sendRequestItemsToCreateCountryList();
 
         List<String> list = minimizationAlgorithm.getCountryAvailableList();
-        assertThat(getInfo(list,0,0),is ("Brazil") );
-        assertThat(getInfo(list,1,0),is ("Argentina") );
+
+        assertThat(getInfo(list,0,0), is ("Brazil"));
+        assertThat(getInfo(list,1,0), is ("Argentina"));
 
     }
 

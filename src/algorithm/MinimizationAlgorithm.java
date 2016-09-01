@@ -9,6 +9,17 @@ public class MinimizationAlgorithm {
 
 
     public void execute() {
+
+
+    }
+
+
+    public void sendRequestItemsToCreateCountryList(){
+
+        for (String item : requestList) {
+            String product = getParseInfo(item, 0);
+            createCountryListThatHaveProduct(product);
+        }
     }
 
 
