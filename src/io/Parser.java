@@ -13,12 +13,15 @@ import java.util.List;
 
 
 public class Parser {
-    private List<String> inputArray = new ArrayList<>();
     private static final String FILE_NOT_FOUND_MESSAGE = "File not found";
     private MinimizationAlgorithm minimizationAlgorithm;
 
 
-    public List<String> readFile(String fileAddress) throws Exception {
+    public Parser(MinimizationAlgorithm minimizationAlgorithm) {
+        this.minimizationAlgorithm = minimizationAlgorithm;
+    }
+
+    public void readFile(String fileAddress) throws Exception {
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileAddress));
@@ -26,7 +29,6 @@ public class Parser {
             while (line != null) {
 
                 line = bufferedReader.readLine();
-                System.out.println(line);
                 parseLine(line);
             }
             bufferedReader.close();
@@ -34,8 +36,6 @@ public class Parser {
             } catch (FileNotFoundException ex) {
                 throw new FileErrorException(FILE_NOT_FOUND_MESSAGE);
         }
-
-        return inputArray;
     }
 
     private void parseLine(String inputLine){
@@ -54,23 +54,6 @@ public class Parser {
     }
 
     private boolean isCountry(String[] line){
-        return line.length == 2;
-
+        return line.length == 3;
     }
-
-
-  /*  private void splitLine(String[] line){
-
-        if (line.length == 2){
-            this.countryName = line[0];
-            this.productName = line[1];
-            this.productAmount =  Integer.parseInt(line[2]);
-
-        }else if (line.length == 1){
-            this.productName = line[0];
-            this.productAmount =  Integer.parseInt(line[1]);
-        }
-    }*/
-
-
 }
