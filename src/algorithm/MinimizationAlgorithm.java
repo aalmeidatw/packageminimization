@@ -9,12 +9,6 @@ public class MinimizationAlgorithm {
 
 
     public void execute() {
-
-
-        String[] arr = {"A", "B", "C", "D", "E", "F"};
-        //combinations2(arr, 3, 0, new String[3]);
-
-
     }
 
 
@@ -22,7 +16,7 @@ public class MinimizationAlgorithm {
 
         for (String country : countryList) {
 
-            String productName = getProductName(country);
+            String productName = getParseInfo(country, 1);
 
             if (productName.equals(productRequest)) {
                 countryAvailableList.add(country);
@@ -34,11 +28,6 @@ public class MinimizationAlgorithm {
     public String getParseInfo(String inputLine, int position){
         String[] line = inputLine.split(" ");
         return line[position];
-    }
-
-    private String getProductName(String country) {
-        String[] line = country.split(" ");
-        return line[1];
     }
 
     public List<String> getCountryList() {

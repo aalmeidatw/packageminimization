@@ -1,5 +1,6 @@
 package io;
 
+import algorithm.MinimizationAlgorithm;
 import exception.FileErrorException;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,13 +17,13 @@ public class ParserTest {
 
     @Before
     public void setUp() throws Exception {
-        this.parser = new Parser();
+        this.parser = new Parser(new MinimizationAlgorithm());
     }
 
     @Test
     public void shouldReturnArrayAsInputFile() throws Exception {
-        List<String> inputArray = parser.readFile(FILE_ADDRESS);
-        //assertThat(inputArray.get(0), is("Brazil"));
+
+
 
     }
 

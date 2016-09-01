@@ -78,12 +78,12 @@ public class MinimizationAlgorithmTest {
     }
 
     @Test
-    public void shoudReturnFirstWordOfStringPassed() throws Exception {
+    public void shouldReturnFirstWordOfStringPassed() throws Exception {
         assertThat(minimizationAlgorithm.getParseInfo(PARSE_STRING, 0), is ("First"));
     }
 
     @Test
-    public void shoudReturnSecondWordOfStringPassed() throws Exception {
+    public void shouldReturnSecondWordOfStringPassed() throws Exception {
         assertThat(minimizationAlgorithm.getParseInfo(PARSE_STRING, 1), is ("Second"));
     }
 
