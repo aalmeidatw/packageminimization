@@ -14,15 +14,7 @@ public class MinimizationAlgorithm {
         String product;
         int quantity;
 
-
-
-        // cria lista de paises que possuem o produto
         sendRequestItemsToCreateCountryList();
-
-
-
-
-
 
         for (String item : requestList) {
             product = getParseInfo(item, 0);
@@ -34,10 +26,7 @@ public class MinimizationAlgorithm {
             }
         }
 
-
-
-
-    return response;
+        return response;
     }
 
 
