@@ -20,13 +20,6 @@ public class ParserTest {
         this.parser = new Parser(new MinimizationAlgorithm());
     }
 
-    @Test
-    public void shouldReturnArrayAsInputFile() throws Exception {
-
-
-
-    }
-
     @Test (expected = FileErrorException.class)
     public void shouldThrowExceptionWhenFileIsNotFound() throws Exception {
         parser.readFile(ERROR_FILE_ADDRESS);

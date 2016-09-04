@@ -6,11 +6,55 @@ public class MinimizationAlgorithm {
     private List<String> countryList = new ArrayList<>();
     private List<String> countryAvailableList = new ArrayList<>();
     private List<String> requestList = new ArrayList<>();
+    private List<String> response = new ArrayList<>();
 
 
-    public void execute() {
+
+    public List<String> execute() {
+        String product;
+        int quantity;
 
 
+
+        // cria lista de paises que possuem o produto
+        sendRequestItemsToCreateCountryList();
+
+
+
+
+
+
+        for (String item : requestList) {
+            product = getParseInfo(item, 0);
+            quantity = Integer.parseInt(getParseInfo(item, 1));
+
+            if (requestList.size() == 1){
+                response.add(String.valueOf(1));
+                response.add(findCountry(product, quantity));
+            }
+        }
+
+
+
+
+    return response;
+    }
+
+
+    public String findCountry(String productRequest, int quantityNeeded){
+        String result = "";
+
+        for (String country : countryAvailableList) {
+
+            String product = getParseInfo(country, 1);
+
+            int quantity = Integer.parseInt(getParseInfo(country, 2));
+
+            if(product.equals(productRequest) && (quantity == quantityNeeded)){
+                result = country;
+            }
+        }
+        return result;
     }
 
 
@@ -21,9 +65,7 @@ public class MinimizationAlgorithm {
             createCountryListThatHaveProduct(product);
         }
     }
-
-
-    public void createCountryListThatHaveProduct(String productRequest) {
+   private void createCountryListThatHaveProduct(String productRequest) {
 
         for (String country : countryList) {
 
