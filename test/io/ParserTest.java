@@ -17,6 +17,8 @@ public class ParserTest {
     private final String ERROR_FILE_ADDRESS = "src/resource/fil.txt";
     private List<InventoryItem> inventoryItemList;
     private List<OrderItem> orderItemList;
+    private final String BRAZIL_NAME = "Brazil";
+    private final String KEYBOARD_NAME = "Keyboard";
 
     @Before
     public void setUp() throws Exception {
@@ -35,7 +37,7 @@ public class ParserTest {
         List[] expected  = parser.readFile(FILE_ADDRESS);
         this.inventoryItemList = expected[0];
 
-        assertThat(inventoryItemList.get(0).getCountry(), is ("Brazil"));
+        assertThat(inventoryItemList.get(0).getCountry(), is (BRAZIL_NAME));
     }
 
     @Test ()
@@ -43,6 +45,6 @@ public class ParserTest {
         List[] expected  = parser.readFile(FILE_ADDRESS);
         this.orderItemList = expected[1];
 
-        assertThat(orderItemList.get(0).getProductName(), is ("Keyboard"));
+        assertThat(orderItemList.get(0).getProductName(), is (KEYBOARD_NAME));
     }
 }
