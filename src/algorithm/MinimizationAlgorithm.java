@@ -1,94 +1,50 @@
 package algorithm;
+import model.InventoryItem;
+import model.OrderItem;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MinimizationAlgorithm {
-    private List<String> countryList = new ArrayList<>();
-    private List<String> countryAvailableList = new ArrayList<>();
-    private List<String> requestList = new ArrayList<>();
-    private List<String> response = new ArrayList<>();
 
+    public void execute(List<InventoryItem> inventoryList, List<OrderItem> orderList) {
 
+            findShipping(inventoryList, orderList, createRequestListMap(orderList));
+    }
 
-    public List<String> execute() {
-        String product;
-        int quantity;
+    public List<InventoryItem> findShipping(List<InventoryItem> inventoryList,
+                                            List<OrderItem> orderList,
+                                            HashMap<String, Integer> requestListMap ){
 
-        sendRequestItemsToCreateCountryList();
+        List<InventoryItem> shipping = new ArrayList<>();
 
-        for (String item : requestList) {
-            product = getParseInfo(item, 0);
-            quantity = Integer.parseInt(getParseInfo(item, 1));
+        for (OrderItem item : orderList) {
+            for (InventoryItem inventory: inventoryList) {
+                if (inventory.getProductName().equals(item.getProductName())){
+                    if(requestListMap.get(item.getProductName()) > 0 ){
 
-            if (requestList.size() == 1){
-                response.add(String.valueOf(1));
-                response.add(findCountry(product, quantity));
+                        int newQuantity = requestListMap.get(item.getProductName()) - inventory.getQuantity();
+                        requestListMap.put( item.getProductName(), newQuantity);
+                        shipping.add(inventory);
+                    }
+                }
             }
         }
-
-        return response;
+        return shipping;
     }
 
 
-    public String findCountry(String productRequest, int quantityNeeded){
-        String result = "";
+    public HashMap<String, Integer> createRequestListMap(List<OrderItem> orderItemList){
 
-        for (String country : countryAvailableList) {
+        HashMap<String, Integer> requestList = new HashMap<>();
 
-            String product = getParseInfo(country, 1);
-
-            int quantity = Integer.parseInt(getParseInfo(country, 2));
-
-            if(product.equals(productRequest) && (quantity == quantityNeeded)){
-                result = country;
-            }
+        for (OrderItem item: orderItemList) {
+            requestList.put(item.getProductName(), item.getQuantity());
         }
-        return result;
-    }
-
-
-    public void sendRequestItemsToCreateCountryList(){
-
-        for (String item : requestList) {
-            String product = getParseInfo(item, 0);
-            createCountryListThatHaveProduct(product);
-        }
-    }
-   private void createCountryListThatHaveProduct(String productRequest) {
-
-        for (String country : countryList) {
-
-            String productName = getParseInfo(country, 1);
-
-            if (productName.equals(productRequest)) {
-                countryAvailableList.add(country);
-            }
-        }
-    }
-
-
-    public String getParseInfo(String inputLine, int position){
-        String[] line = inputLine.split(" ");
-        return line[position];
-    }
-
-    public List<String> getCountryList() {
-        return countryList;
-    }
-
-    public List<String> getRequestList() {
         return requestList;
     }
 
-    public List<String> getCountryAvailableList() {
-        return countryAvailableList;
-    }
-
-    public void addCountry(String country) {
-        this.countryList.add(country);
-    }
-
-    public void addIRequestList(String request) {
-        requestList.add(request);
-    }
 }
+
+

@@ -1,22 +1,28 @@
 package io;
 
 
-import algorithm.MinimizationAlgorithm;
 import exception.FileErrorException;
+import model.InventoryItem;
+import model.OrderItem;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Parser {
     private static final String FILE_NOT_FOUND_MESSAGE = "File not found";
-    private MinimizationAlgorithm minimizationAlgorithm;
+    private List<InventoryItem> inventoryItemList;
+    private List<OrderItem> orderItemList;
 
 
-    public Parser(MinimizationAlgorithm minimizationAlgorithm) {
-        this.minimizationAlgorithm = minimizationAlgorithm;
+    public Parser() {
+        this.inventoryItemList = new ArrayList<>();
+        this.orderItemList = new ArrayList<>();
     }
 
-    public void readFile(String fileAddress) throws Exception {
+    public List[] readFile(String fileAddress ) throws Exception {
 
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileAddress));
@@ -31,6 +37,8 @@ public class Parser {
             } catch (FileNotFoundException ex) {
                 throw new FileErrorException(FILE_NOT_FOUND_MESSAGE);
         }
+        return new List[] {inventoryItemList, orderItemList};
+
     }
 
     private void parseLine(String inputLine){
@@ -39,16 +47,16 @@ public class Parser {
 
             String[] line = inputLine.split(" ");
 
-            if (isCountry(line)) {
-                minimizationAlgorithm.addCountry(inputLine);
+            if (isInventory(line)) {
+                inventoryItemList.add(new InventoryItem(line[0], line[1], Integer.parseInt(line[2])));
 
             } else {
-                minimizationAlgorithm.addIRequestList(inputLine);
+                orderItemList.add(new OrderItem(line[0], Integer.parseInt(line[1])));
             }
         }
     }
 
-    private boolean isCountry(String[] line){
+    private boolean isInventory(String[] line){
         return line.length == 3;
     }
 }

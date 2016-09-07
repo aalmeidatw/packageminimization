@@ -1,10 +1,14 @@
 package app;
 
 import algorithm.MinimizationAlgorithm;
+import model.InventoryItem;
+import model.OrderItem;
 import org.junit.Before;
 import org.junit.Test;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -12,100 +16,49 @@ import static org.junit.Assert.*;
 
 public class MinimizationAlgorithmTest {
     private MinimizationAlgorithm minimizationAlgorithm;
-    private static final String BRAZIL_COUNTRY = "Brazil Mouse 1";
-    private static final String CHILE_COUNTRY = "Chile keyboard 2";
-    private static final String ARGENTINA_COUNTRY = "Argentina Mouse 2";
-    private static final String MOUSE_REQUEST = "Mouse 2";
-    private static final String PARSE_STRING = "First Second";
-    private static final String KEYBOARD_REQUEST = "keyboard 2";
-
+    private List<OrderItem> orderItemList;
+    private List<InventoryItem> inventoryList;
+    private static final String MOUSE_NAME= "Mouse";
+    private static final String KEYBOARD_NAME= "Keyboard";
+    private static final int MOUSE_QUANTITY = 2;
+    private static final int KEYBOARD_QUANTITY = 3;
+    private static final String BRAZIL_COUNTRY = "Brazil";
+    private static final String ARGENTINA_COUNTRY = "Argentina";
 
     @Before
     public void setUp() throws Exception {
         this.minimizationAlgorithm = new MinimizationAlgorithm();
-        minimizationAlgorithm.addCountry(BRAZIL_COUNTRY);
-        minimizationAlgorithm.addCountry(CHILE_COUNTRY);
-        minimizationAlgorithm.addCountry(ARGENTINA_COUNTRY);
+        this.orderItemList = new ArrayList<>();
+        this.inventoryList = new ArrayList<>();
+
+        orderItemList.add(new OrderItem(MOUSE_NAME, MOUSE_QUANTITY));
+        orderItemList.add(new OrderItem(KEYBOARD_NAME, KEYBOARD_QUANTITY));
     }
 
     @Test
-    public void shouldAddBrazilCountry() throws Exception {
-        List<String> list = minimizationAlgorithm.getCountryList();
-        assertThat(getInfo(list,0,0 ),is ("Brazil") );
-    }
+    public void shouldCreateRequestListMap() throws Exception {
+
+        HashMap<String, Integer> expected;
+        expected = minimizationAlgorithm.createRequestListMap(orderItemList);
+
+        assertThat(expected.get(MOUSE_NAME), is(MOUSE_QUANTITY));
+        assertThat(expected.get(KEYBOARD_NAME), is(KEYBOARD_QUANTITY));
+     }
 
     @Test
-    public void shouldAddChileCountry() throws Exception {
-        List<String> list = minimizationAlgorithm.getCountryList();
-        assertThat(getInfo(list,1,0),is ("Chile") );
+    public void shouldReturnListOfCountriesResponse() throws Exception {
+
+        inventoryList.add(new InventoryItem(ARGENTINA_COUNTRY, KEYBOARD_NAME, KEYBOARD_QUANTITY));
+        inventoryList.add(new InventoryItem(BRAZIL_COUNTRY, MOUSE_NAME, MOUSE_QUANTITY));
+
+        HashMap<String, Integer> requestList = new HashMap<>();
+        requestList.put(MOUSE_NAME, MOUSE_QUANTITY);
+        requestList.put(KEYBOARD_NAME, KEYBOARD_QUANTITY);
+
+        List<InventoryItem> expected = minimizationAlgorithm.findShipping(inventoryList, orderItemList, requestList );
+        assertThat(expected.get(0).getCountry(), is(BRAZIL_COUNTRY));
+        assertThat(expected.get(1).getCountry(), is(ARGENTINA_COUNTRY));
     }
-
-    @Test
-    public void shouldAddMouseRequest() throws Exception {
-        minimizationAlgorithm.addIRequestList(MOUSE_REQUEST);
-
-        List<String> list = minimizationAlgorithm.getRequestList();
-        assertThat(getInfo(list,0,0),is ("Mouse") );
-    }
-
-    @Test
-    public void shouldAddKeyboardRequest() throws Exception {
-        minimizationAlgorithm.addIRequestList(MOUSE_REQUEST);
-        minimizationAlgorithm.addIRequestList(KEYBOARD_REQUEST);
-
-        List<String> list = minimizationAlgorithm.getRequestList();
-        assertThat(getInfo(list,1,0),is ("keyboard") );
-    }
-
-    @Test
-    public void shouldCreateCountryListThatHaveMouseProductPassed() throws Exception {
-        minimizationAlgorithm.addIRequestList(MOUSE_REQUEST);
-        minimizationAlgorithm.sendRequestItemsToCreateCountryList();
-
-        List<String> list = minimizationAlgorithm.getCountryAvailableList();
-
-        assertThat(getInfo(list,0,0), is ("Brazil"));
-        assertThat(getInfo(list,1,0), is ("Argentina"));
-    }
-
-    @Test
-    public void shouldReturnFirstWordOfStringPassed() throws Exception {
-        assertThat(minimizationAlgorithm.getParseInfo(PARSE_STRING, 0), is ("First"));
-    }
-
-    @Test
-    public void shouldReturnSecondWordOfStringPassed() throws Exception {
-        assertThat(minimizationAlgorithm.getParseInfo(PARSE_STRING, 1), is ("Second"));
-    }
-
-    @Test
-    public void shouldReturnChileCountryWhenKeyBoardRequestIsPassed() throws Exception {
-        minimizationAlgorithm.addIRequestList(KEYBOARD_REQUEST);
-        minimizationAlgorithm.sendRequestItemsToCreateCountryList();
-        assertThat(minimizationAlgorithm.findCountry("keyboard", 2), is(CHILE_COUNTRY));
-    }
-
-    @Test
-    public void shouldReturnArrayThanOneCountry() throws Exception {
-        minimizationAlgorithm.addIRequestList(KEYBOARD_REQUEST);
-        minimizationAlgorithm.sendRequestItemsToCreateCountryList();
-        List<String> response = minimizationAlgorithm.execute();
-        System.out.print(response.get(1).toString());
-
-        assertThat(response.get(0), is("1"));
-        assertThat(response.get(1), is(CHILE_COUNTRY));
-
-
-    }
-
-    private String getInfo(List<String> list, int indexArray, int position){
-        String[] line =list.get(indexArray).split(" ");
-        return line[position];
-    }
-
-
-
-
 }
 
 
