@@ -35,15 +35,6 @@ public class MinimizationAlgorithmTest {
         orderItemList.add(new OrderItem(KEYBOARD_NAME, KEYBOARD_QUANTITY));
     }
 
-    @Test
-    public void shouldCreateRequestListMap() throws Exception {
-
-        HashMap<String, Integer> expected;
-        expected = minimizationAlgorithm.createRequestListMap(orderItemList);
-
-        assertThat(expected.get(MOUSE_NAME), is(MOUSE_QUANTITY));
-        assertThat(expected.get(KEYBOARD_NAME), is(KEYBOARD_QUANTITY));
-     }
 
     @Test
     public void shouldReturnListOfCountriesResponse() throws Exception {

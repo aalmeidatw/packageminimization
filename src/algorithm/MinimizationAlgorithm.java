@@ -35,7 +35,7 @@ public class MinimizationAlgorithm {
     }
 
 
-    public HashMap<String, Integer> createRequestListMap(List<OrderItem> orderItemList){
+    private HashMap<String, Integer> createRequestListMap(List<OrderItem> orderItemList){
 
         HashMap<String, Integer> requestList = new HashMap<>();
 
