@@ -41,7 +41,6 @@ public class MinimizationAlgorithmTest {
         assertThat(actual, is(expected));
     }
 
-
     @Test
     public void testScenario1() throws Exception {
         List<InventoryItem> inventoryItemsList = asList(new InventoryItem("Brazil", "Keyboard", 2),
@@ -95,7 +94,6 @@ public class MinimizationAlgorithmTest {
                 new InventoryItem("Brazil", "Monitor", 1),
                 new InventoryItem("Chile", "Monitor", 1));
 
-        ;
         assertThat(actual, is(inventoryExpectedItemsList));
     }
 }
