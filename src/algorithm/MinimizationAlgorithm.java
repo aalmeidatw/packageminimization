@@ -13,38 +13,22 @@ public class MinimizationAlgorithm {
                 .stream()
                 .collect(Collectors.toMap(OrderItem::getProductName, OrderItem::getQuantity));
 
-
         List<InventoryItem> shipping = new ArrayList<>();
 
         for (OrderItem item : orderList) {
+
             for (InventoryItem inventory : inventoryList) {
 
-                if (inventory.getProductName().equals(item.getProductName())) {
-
-                    if (requestListMap.get(item.getProductName()) > 0) {
-
-                        int newQuantity = quantityCalculate(requestListMap.get(item.getProductName()), inventory.getQuantity());
-
-                        requestListMap.put(item.getProductName(), newQuantity);
+                if (inventory.getProductName().equals(item.getProductName()) && (requestListMap.get(item.getProductName()) > 0)) {
+                    if (item.getQuantity() == inventory.getQuantity()){
                         shipping.add(inventory);
+                        requestListMap.put(item.getProductName(),0);
                     }
                 }
             }
         }
         return shipping;
     }
-
-
-    public int quantityCalculate(int requestQuantity, int inventoryQuantity){
-
-        if (inventoryQuantity >= requestQuantity){
-            return 0;
-        }
-
-        return requestQuantity - inventoryQuantity;
-    }
-
-
 
 }
 
