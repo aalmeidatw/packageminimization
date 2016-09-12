@@ -36,7 +36,49 @@ public class MinimizationAlgorithmTest {
     @Test
     public void shouldReturnBrazilAndArgentinaCountriesWhenMouseAndMonitorProductsIsPassed() throws Exception {
         List<InventoryItem> actual = minimizationAlgorithm.execute(asList(BRAZIL_ITEM, CHILE_ITEM, ARGENTINA_ITEM), asList(MOUSE_PRODUCT, MONITOR_PRODUCT));
-        List<InventoryItem> expected = asList(BRAZIL_ITEM, ARGENTINA_ITEM);
+        List<InventoryItem> expected = asList(ARGENTINA_ITEM, BRAZIL_ITEM);
+
+        assertThat(actual, is(expected));
+    }
+
+
+    @Test
+    public void testScenario3() throws Exception {
+        InventoryItem brazilKeyboard = new InventoryItem("Brazil", "Keyboard", 2);
+        InventoryItem brazilMouse = new InventoryItem("Brazil", "Mouse", 1);
+        InventoryItem brazilMonitor = new InventoryItem("Brazil", "Monitor", 1);
+
+        InventoryItem chileKeyboard = new InventoryItem("Chile", "Keyboard", 2);
+        InventoryItem chileMonitor = new InventoryItem("Chile", "Monitor", 2);
+
+        InventoryItem panamaMouse = new InventoryItem("Panama", "Mouse", 2);
+
+        InventoryItem argentinaMonitor = new InventoryItem("Argentina", "Monitor", 2);
+
+        OrderItem keyboardProduct = new OrderItem("Keyboard", 3);
+        OrderItem mouseProduct = new OrderItem("Mouse", 1);
+        OrderItem monitorProduct = new OrderItem("Monitor", 2);
+
+        List<InventoryItem> actual = minimizationAlgorithm.execute(asList(brazilKeyboard,
+                                                                          brazilMouse,
+                                                                          brazilMonitor,
+                                                                          chileKeyboard,
+                                                                          chileMonitor,
+                                                                          panamaMouse,
+                                                                          argentinaMonitor),
+                                    asList(keyboardProduct, mouseProduct, monitorProduct));
+
+        InventoryItem brazilKeyboardExpected = new InventoryItem("Brazil", "Keyboard", 2);
+        InventoryItem chileKeyboardExpected = new InventoryItem("Chile", "Keyboard", 1);
+        InventoryItem brazilMouseExpected = new InventoryItem("Brazil", "Mouse", 1);
+        InventoryItem brazilMonitorExpected = new InventoryItem("Brazil", "Monitor", 1);
+        InventoryItem chileMonitorExpected = new InventoryItem("Chile", "Monitor", 1);
+
+        List<InventoryItem> expected = asList(brazilKeyboardExpected,
+                                              chileKeyboardExpected,
+                                              brazilMouseExpected,
+                                              brazilMonitorExpected,
+                                              chileMonitorExpected);
 
         assertThat(actual, is(expected));
     }

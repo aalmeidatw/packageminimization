@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 
 public class ParserTest {
     private Parser parser;
-    private final String FILE_ADDRESS = "src/resource/file.txt";
+    private final String FILE_ADDRESS = "src/resource/testCase1.txt";
     private final String ERROR_FILE_ADDRESS = "src/resource/fil.txt";
     private final InventoryItem BRAZIL_ITEM = new InventoryItem("Brazil", "Mouse", 2);
     private final InventoryItem CHINE_ITEM = new InventoryItem("Chile", "Keyboard", 3);
