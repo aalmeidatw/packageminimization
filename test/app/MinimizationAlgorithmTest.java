@@ -41,6 +41,29 @@ public class MinimizationAlgorithmTest {
         assertThat(actual, is(expected));
     }
 
+    @Test
+    public void testScenario2() throws Exception {
+        InventoryItem brazilKeyboard = new InventoryItem("Brazil", "Keyboard", 2);
+        InventoryItem brazilMouse = new InventoryItem("Brazil", "Mouse", 1);
+        InventoryItem argentinaMouse = new InventoryItem("Argentina", "Mouse", 2);
+
+        OrderItem keyboardProduct = new OrderItem("Keyboard", 2);
+        OrderItem mouseProduct = new OrderItem("Mouse", 1);
+
+        List<InventoryItem> actual = minimizationAlgorithm.execute(asList(brazilKeyboard,
+                                                                          brazilMouse,
+                                                                          argentinaMouse),
+                                                                   asList(keyboardProduct, mouseProduct));
+
+        InventoryItem brazilKeyboardExpected = new InventoryItem("Brazil", "Keyboard", 2);
+        InventoryItem brazilMouseExpected = new InventoryItem("Brazil", "Mouse", 1);
+
+        List<InventoryItem> expected = asList(brazilKeyboardExpected,
+                                              brazilMouseExpected);
+        assertThat(actual, is(expected));
+
+
+    }
 
     @Test
     public void testScenario3() throws Exception {
