@@ -19,7 +19,7 @@ public class MinimizationAlgorithm {
 
             for (InventoryItem inventory : inventoryList) {
 
-                if (inventory.getProductName().equals(item.getProductName()) && (requestListMap.get(item.getProductName()) > 0)) {
+                if (isSameProductNameAndQuantityNeededIsMoreThanZero(requestListMap, item, inventory)) {
                     if (item.getQuantity() == inventory.getQuantity()){
                         shipping.add(inventory);
                         requestListMap.put(item.getProductName(),0);
@@ -28,6 +28,10 @@ public class MinimizationAlgorithm {
             }
         }
         return shipping;
+    }
+
+    private boolean isSameProductNameAndQuantityNeededIsMoreThanZero(Map<String, Integer> requestListMap, OrderItem item, InventoryItem inventory) {
+        return inventory.getProductName().equals(item.getProductName()) && (requestListMap.get(item.getProductName()) > 0);
     }
 
 }
