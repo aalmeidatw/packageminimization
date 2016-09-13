@@ -26,11 +26,7 @@ public class MinimizationAlgorithm {
                     int minValue = Math.min(requestListMap.get(item.getProductName()), inventory.getQuantity() );
                     int value = requestListMap.get(item.getProductName()) - inventory.getQuantity();
 
-                    if (requestListMap.get(item.getProductName()) <= inventory.getQuantity()) {
-                        insertNewValueInRequestMap(requestListMap, item, 0);
-                    }
-
-                    insertNewValueInRequestMap(requestListMap, item, value);
+                    insertNewValueInRequestMap(requestListMap, item, Math.max(0, value));
                     shipping.add(new InventoryItem(inventory.getCountry(), inventory.getProductName(), minValue));
                 }
             }
