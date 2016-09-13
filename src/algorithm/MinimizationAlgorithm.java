@@ -5,7 +5,6 @@ import model.OrderItem;
 import model.Response;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class MinimizationAlgorithm {
@@ -37,10 +36,10 @@ public class MinimizationAlgorithm {
                 }
             }
         }
-        return new Response(shipping , returnNumberOfPackage(shipping));
+        return new Response(shipping , getNumberOfPackage(shipping));
     }
 
-    private int returnNumberOfPackage(List<InventoryItem> shipping){
+    private int getNumberOfPackage(List<InventoryItem> shipping){
         return (int) shipping.stream()
                              .map(InventoryItem::getCountry)
                              .distinct()
