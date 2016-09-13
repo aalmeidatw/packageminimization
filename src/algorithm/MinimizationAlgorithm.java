@@ -22,11 +22,10 @@ public class MinimizationAlgorithm {
             for (InventoryItem inventory : inventoryList) {
 
                 if (isSameProductNameAndQuantityNeededIsMoreThanZero(requestListMap, item, inventory)) {
-
                     int minValue = Math.min(requestListMap.get(item.getProductName()), inventory.getQuantity() );
-                    int value = requestListMap.get(item.getProductName()) - inventory.getQuantity();
+                    int neededQuantity = requestListMap.get(item.getProductName()) - inventory.getQuantity();
 
-                    insertNewValueInRequestMap(requestListMap, item, Math.max(0, value));
+                    insertNewValueInRequestMap(requestListMap, item, Math.max(0, neededQuantity));
                     shipping.add(new InventoryItem(inventory.getCountry(), inventory.getProductName(), minValue));
                 }
             }
@@ -35,12 +34,10 @@ public class MinimizationAlgorithm {
     }
 
     private int getNumberOfPackage(List<InventoryItem> shipping){
-
         Long  numberOfPackage = shipping.stream()
                              .map(InventoryItem::getCountry)
                              .distinct()
                              .count();
-
         return numberOfPackage.intValue();
     }
 
@@ -51,7 +48,6 @@ public class MinimizationAlgorithm {
     private boolean isSameProductNameAndQuantityNeededIsMoreThanZero(Map<String, Integer> requestListMap, OrderItem item, InventoryItem inventory) {
         return inventory.getProductName().equals(item.getProductName()) && (requestListMap.get(item.getProductName()) > 0);
     }
-
 }
 
 
