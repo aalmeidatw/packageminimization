@@ -41,12 +41,10 @@ public class MinimizationAlgorithm {
     }
 
     private int returnNumberOfPackage(List<InventoryItem> shipping){
-
-        Map<String, Long> expected =  shipping.stream()
-                                              .collect(Collectors.groupingBy(
-                                                    InventoryItem::getCountry, Collectors.counting()));
-        return expected.size();
-
+        return (int) shipping.stream()
+                             .map(InventoryItem::getCountry)
+                             .distinct()
+                             .count();
     }
 
     private void insertNewValueInRequestMap(Map<String, Integer> requestListMap, OrderItem item, int value) {
