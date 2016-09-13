@@ -1,5 +1,6 @@
 package algorithm;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import model.InventoryItem;
 import model.OrderItem;
 import model.Response;
@@ -23,27 +24,31 @@ public class MinimizationAlgorithm {
 
                 if (isSameProductNameAndQuantityNeededIsMoreThanZero(requestListMap, item, inventory)) {
 
-                    if (requestListMap.get(item.getProductName()) >= inventory.getQuantity()){
-                        int value = requestListMap.get(item.getProductName()) - inventory.getQuantity();
-                        insertNewValueInRequestMap(requestListMap, item, value);
-                        shipping.add(inventory);
+                    int minValue = Math.min(requestListMap.get(item.getProductName()), inventory.getQuantity() );
+                    int value = requestListMap.get(item.getProductName()) - inventory.getQuantity();
 
-                    }else if (requestListMap.get(item.getProductName())<= inventory.getQuantity()){
-                        int newValue = requestListMap.get(item.getProductName());
+                    if (requestListMap.get(item.getProductName()) >= inventory.getQuantity()){
+                        insertNewValueInRequestMap(requestListMap, item, value);
+
+                    } else {
                         insertNewValueInRequestMap(requestListMap, item, 0);
-                        shipping.add(new InventoryItem(inventory.getCountry(), inventory.getProductName(), newValue));
                     }
+
+                    shipping.add(new InventoryItem(inventory.getCountry(), inventory.getProductName(), minValue));
                 }
             }
         }
-        return new Response(shipping , getNumberOfPackage(shipping));
+        return new Response(shipping,getNumberOfPackage(shipping));
     }
 
     private int getNumberOfPackage(List<InventoryItem> shipping){
-        return (int) shipping.stream()
+
+        Long  numberOfPackage = shipping.stream()
                              .map(InventoryItem::getCountry)
                              .distinct()
                              .count();
+
+        return numberOfPackage.intValue();
     }
 
     private void insertNewValueInRequestMap(Map<String, Integer> requestListMap, OrderItem item, int value) {
