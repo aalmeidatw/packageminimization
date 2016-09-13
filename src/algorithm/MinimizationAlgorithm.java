@@ -1,10 +1,9 @@
 package algorithm;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
+
 import model.InventoryItem;
 import model.OrderItem;
 import model.Response;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -27,13 +26,11 @@ public class MinimizationAlgorithm {
                     int minValue = Math.min(requestListMap.get(item.getProductName()), inventory.getQuantity() );
                     int value = requestListMap.get(item.getProductName()) - inventory.getQuantity();
 
-                    if (requestListMap.get(item.getProductName()) >= inventory.getQuantity()){
-                        insertNewValueInRequestMap(requestListMap, item, value);
-
-                    } else {
+                    if (requestListMap.get(item.getProductName()) <= inventory.getQuantity()) {
                         insertNewValueInRequestMap(requestListMap, item, 0);
                     }
 
+                    insertNewValueInRequestMap(requestListMap, item, value);
                     shipping.add(new InventoryItem(inventory.getCountry(), inventory.getProductName(), minValue));
                 }
             }
