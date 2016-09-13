@@ -2,12 +2,15 @@ package algorithm;
 
 import model.InventoryItem;
 import model.OrderItem;
+import model.Response;
+
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class MinimizationAlgorithm {
 
-    public List<InventoryItem> execute(List<InventoryItem> inventoryList, List<OrderItem> orderList) {
+    public Response execute(List<InventoryItem> inventoryList, List<OrderItem> orderList) {
 
         Map<String, Integer> requestListMap = orderList
                 .stream()
@@ -34,7 +37,16 @@ public class MinimizationAlgorithm {
                 }
             }
         }
-        return shipping;
+        return new Response(shipping , returnNumberOfPackage(shipping));
+    }
+
+    private int returnNumberOfPackage(List<InventoryItem> shipping){
+
+        Map<String, Long> expected =  shipping.stream()
+                                              .collect(Collectors.groupingBy(
+                                                    InventoryItem::getCountry, Collectors.counting()));
+        return expected.size();
+
     }
 
     private void insertNewValueInRequestMap(Map<String, Integer> requestListMap, OrderItem item, int value) {
