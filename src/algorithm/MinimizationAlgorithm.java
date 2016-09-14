@@ -22,6 +22,7 @@ public class MinimizationAlgorithm {
             for (InventoryItem inventory : inventoryList) {
 
                 if (isSameProductNameAndQuantityNeededIsMoreThanZero(requestListMap, item, inventory)) {
+
                     int minValue = Math.min(requestListMap.get(item.getProductName()), inventory.getQuantity() );
                     int neededQuantity = requestListMap.get(item.getProductName()) - inventory.getQuantity();
 
